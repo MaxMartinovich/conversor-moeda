@@ -1,3 +1,6 @@
+/* ===============================
+   RESET + VARIÁVEIS
+================================ */
 * {
   margin: 0;
   padding: 0;
@@ -5,94 +8,163 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+:root {
+  --blue-main: #2563eb;
+  --blue-dark: #1e40af;
+  --gray-bg: #f4f6f8;
+  --gray-card: #ffffff;
+  --gray-soft: #f9fafb;
+  --gray-border: #d1d5db;
+  --text-main: #111827;
+}
+
+/* ===============================
+   BODY
+================================ */
 body {
-  background-color: #f4f6f8;
+  background-color: var(--gray-bg);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   flex-direction: column;
   gap: 40px;
 }
+
+/* ===============================
+   TEXTO
+================================ */
 p {
   font-size: 20px;
-  color: #111827;
+  color: var(--text-main);
 }
+
+/* ===============================
+   IMAGENS
+================================ */
 .logo-imagem {
   width: 250px;
   height: 250px;
+  object-fit: contain;
 }
 
-.espacamento {
-  margin-left: 34px;
-  padding-top: 75px;
+.seta,
+.icone {
+  height: 40px;
+  object-fit: contain;
 }
+
+.icone {
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* ===============================
+   CONTAINER PRINCIPAL
+================================ */
 .wrapper {
-  background-color: #ffffff;
-  border-radius: 24px;
+  background-color: var(--gray-card);
   width: 375px;
-  height: 900px;
+  min-height: 700px;
+  padding: 32px 24px;
+  border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
-.seta {
-  width: cover;
-  height: 40px;
-  display: block;
-}
-.icone {
-  width: cover;
-  height: 50px;
-  border-radius: 500px;
-}
 
+/* ===============================
+   LABELS
+================================ */
 .label {
   font-size: 28px;
   color: #1f2937;
+  margin-bottom: 8px;
 }
 
+/* ===============================
+   INPUTS E SELECT
+================================ */
 #moeda,
 .input {
-  font-size: 18px;
+  font-size: 21px;
   width: 260px;
   height: 42px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
-  padding: 0 10px;
-  background-color: #f9fafb;
+  border: 1px solid var(--gray-border);
+  padding: 0 12px;
+  background-color: var(--gray-soft);
 }
 
+#moeda:focus,
+.input:focus {
+  outline: none;
+  border-color: var(--blue-main);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* ===============================
+   BOTÃO
+================================ */
 .button {
-  font-size: 18px;
   width: 327px;
   height: 48px;
-  border-radius: 50px;
-  color: #ffffff;
-  background-color: #2563eb;
   margin: 40px 0;
+  border-radius: 50px;
   border: none;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
   cursor: pointer;
-  transition: 0.3s;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--blue-main);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  transition: 0.3s ease;
 }
 
 .button:hover {
-  background-color: #1e40af;
+  background-color: var(--blue-dark);
   transform: translateY(-2px);
 }
 
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* ===============================
+   RESULTADO DA CONVERSÃO
+================================ */
 .wrapper-converser {
-  margin-top: 30px;
+  width: 327px;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, var(--gray-soft));
+  border: 1px solid #e5e7eb;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 327px;
-  border-radius: 16px;
-  background-color: #f9fafb;
-  border: 1px solid #011f5b;
-  padding: 20px;
+  gap: 12px;
+}
+
+/* ===============================
+   RESPONSIVO
+================================ */
+@media (max-width: 420px) {
+  .wrapper {
+    width: 90%;
+  }
+
+  #moeda,
+  .input {
+    width: 100%;
+  }
+
+  .button,
+  .wrapper-converser {
+    width: 100%;
+  }
 }
