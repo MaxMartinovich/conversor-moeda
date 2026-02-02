@@ -24,7 +24,7 @@ p {
 
 .espacamento {
   margin-left: 34px;
-  padding-top: 55px;
+  padding-top: 75px;
 }
 .wrapper {
   background-color: rgb(196, 196, 196);
@@ -51,14 +51,14 @@ p {
   font-size: 30px;
 }
 #moeda {
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
   width: 260px;
 }
 .input {
   font-size: 25px;
   width: 260px;
-  height: 50px;
+  height: 40px;
 }
 
 .button {
@@ -75,7 +75,8 @@ p {
   cursor: pointer;
 }
 
-.wrapper-teste {
+.wrapper-converser {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   flex-direction: column;
