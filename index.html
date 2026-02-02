@@ -4,6 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conversor de Moeda</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <img src="img/conversor-moeda.avif" class="logo-imagem" />
+    <div class="wrapper">
+      <label for="moeda">Converta de</label>
+      <select name="moeda" id="moeda">
+        <option value="Real Brasileiro">Real Brasileiro</option>
+        <option value="Dolar">Dolar</option>
+        <option value="Euro">Euro</option>
+        <option value="Peso Argentino">Peso Argentino</option>
+      </select>
+      <label for="moeda">Converta para</label>
+      <select name="moeda" id="moeda">
+        <option value="Real Brasileiro">Real Brasileiro</option>
+        <option value="Dolar">Dolar</option>
+        <option value="Euro">Euro</option>
+        <option value="Peso Argentino">Peso Argentino</option>
+      </select>
+      <label for="valor">Valor</label>
+      <input type="text" placeholder="R$: 1000,00" />
+      <button class="button">Converter</button>
+      <div class="Wrapper-conversao">
+        <img class="iconeCima" src="img/brasil.webp" />
+        <p>Real</p>
+        <h2>R$ 0,00</h2>
+        <img class="seta" src="img/seta.png" />
+        <img class="iconeBaixo" src="img/america.svg" />
+        <p>Dólar americano</p>
+        <h2>US$ 0.00</h2>
+      </div>
+    </div>
+  </body>
 </html>
