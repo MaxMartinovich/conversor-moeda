@@ -35,4 +35,4 @@ O projeto permite converter valores do **Real Brasileiro (BRL)** para diversas m
 
 3ª - Execute a aplicação!
 
-OU abra a pagina do projeto >
+OU abra a pagina do projeto > https://maxmartinovich.github.io/conversor-moeda/
