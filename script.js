@@ -1,60 +1,178 @@
-//Criar um conversorDeBotao para ser utilizado em um eventListener e usar o click
+// ===============================
+// SELEÇÃO DOS ELEMENTOS
+// ===============================
+
+// Botão de converter
 const convertButton = document.querySelector(".button");
+
+// Select de moedas
 const currencySelect = document.querySelector(".convertSelect");
 
-//Criar uma função para pegar diretamente do input o valor e ai você chama essa função no eventListener.
+// Input do valor em Real
+const input = document.querySelector(".input");
+
+// Valor em Real
+const currencyValueToConvert = document.querySelector("#current-value");
+
+// Valor convertido
+const currencyValueConverted = document.querySelector("#converted-value");
+
+// Texto da moeda convertida
+const coinChange = document.querySelector(".coinChange");
+
+// Imagem da moeda convertida
+const changeImg = document.querySelector("#change-img");
+
+// ===============================
+// CONFIGURAÇÃO DAS MOEDAS
+// ===============================
+
+const currencies = {
+  USD: {
+    name: "Dólar Americano",
+    img: "./img/america.svg",
+    locale: "en-US",
+  },
+  EUR: {
+    name: "Euro",
+    img: "./img/euro.jpg",
+    locale: "de-DE",
+  },
+  ARS: {
+    name: "Peso Argentino",
+    img: "./img/Argentina.png",
+    locale: "es-AR",
+  },
+  GBP: {
+    name: "Libra Esterlina",
+    img: "./img/libra.jpg",
+    locale: "en-GB",
+  },
+  JPY: {
+    name: "Iene Japonês",
+    img: "./img/iene.png",
+    locale: "ja-JP",
+  },
+
+  CAD: {
+    name: "Dólar Canadense",
+    img: "./img/canada.png",
+    locale: "en-CA",
+  },
+
+  AUD: {
+    name: "Dólar Australiano",
+    img: "./img/australia.jpg",
+    locale: "en-AU",
+  },
+
+  CHF: {
+    name: "Franco Suíço",
+    img: "./img/suica.png",
+    locale: "de-CH",
+  },
+
+  MXN: {
+    name: "Peso Mexicano",
+    img: "./img/mexico.jpg",
+    locale: "es-MX",
+  },
+};
+
+// ===============================
+// TAXAS DE CÂMBIO
+// ===============================
+
+// Objeto que armazenará as taxas vindas da API
+let rates = {};
+
+// ===============================
+// BUSCAR TAXAS NA API
+// ===============================
+
+async function getRates() {
+  try {
+    // Bloqueia o botão até carregar as taxas
+    convertButton.disabled = true;
+
+    const response = await fetch(
+      "https://api.exchangerate-api.com/v4/latest/BRL",
+    );
+
+    const data = await response.json();
+
+    // Salva apenas as taxas
+    rates = data.rates;
+
+    // Libera o botão
+    convertButton.disabled = false;
+  } catch (error) {
+    alert("Erro ao carregar taxas de câmbio.");
+    console.error(error);
+  }
+}
+
+// ===============================
+// CONVERSÃO DE VALORES
+// ===============================
+
 function convertValues() {
-  const convertCurrency = document.querySelector(".input").value;
-  const currencyValueToConvert = document.querySelector("#current-value"); // Valor em REAL
-  const currencyValueConverted = document.querySelector("#converted-value"); // Valor convertido
+  // Converte vírgula em ponto para evitar NaN
+  const value = Number(input.value.replace(",", "."));
 
-  const dolarToday = 5.5;
-  const euroToday = 6.2;
-  const pesoToday = 0.0036;
+  const currency = currencySelect.value;
 
-  if (currencySelect.value === "dolar") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(convertCurrency / dolarToday);
-  }
-  if (currencySelect.value === "euro") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-      style: "currency",
-      currency: "EUR",
-    }).format(convertCurrency / euroToday);
-  }
-  if (currencySelect.value === "pesoArgentino") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS",
-    }).format(convertCurrency / pesoToday);
-  }
+  if (!value || !rates[currency]) return;
+
+  // Calcula o valor convertido
+  const converted = value * rates[currency];
+
+  // Exibe o valor em Real
   currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
-  }).format(convertCurrency);
+  }).format(value);
+
+  // Exibe o valor convertido com locale correto
+  currencyValueConverted.innerHTML = new Intl.NumberFormat(
+    currencies[currency].locale,
+    {
+      style: "currency",
+      currency: currency,
+    },
+  ).format(converted);
 }
 
+// ===============================
+// TROCA DE MOEDA (TEXTO + IMAGEM)
+// ===============================
+
 function changeCurrency() {
-  const changeCoin = document.querySelector(".coinChange");
-  const changeImg = document.querySelector("#change-img");
+  const currency = currencySelect.value;
 
-  if (currencySelect.value === "dolar") {
-    changeCoin.innerHTML = "Dólar americano";
-    changeImg.src = "./img/america.svg";
-  }
-  if (currencySelect.value === "euro") {
-    changeCoin.innerHTML = "Euro";
-    changeImg.src = "./img/euro.jpg";
-  }
-  if (currencySelect.value === "pesoArgentino") {
-    changeCoin.innerHTML = "Peso Argentino";
-    changeImg.src = "./img/Argentina.png";
-  }
+  // Atualiza nome da moeda
+  coinChange.innerHTML = currencies[currency].name;
 
+  // Atualiza imagem da moeda
+  changeImg.src = currencies[currency].img;
+
+  // Atualiza a conversão automaticamente
   convertValues();
 }
 
+// ===============================
+// EVENTOS
+// ===============================
+
+// Troca moeda → muda imagem e converte
 currencySelect.addEventListener("change", changeCurrency);
+
+// Botão → converte
 convertButton.addEventListener("click", convertValues);
+
+// ===============================
+// INICIALIZAÇÃO
+// ===============================
+
+// Carrega taxas ao abrir a página
+getRates();
