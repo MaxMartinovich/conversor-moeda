@@ -13,32 +13,29 @@
         <label for="moeda" class="label"><b>Converta de:</b></label>
         <select name="moeda" id="moeda">
           <option value="Real Brasileiro">R$ Real Brasileiro</option>
-          <option value="Dolar">US$ Dolar</option>
-          <option value="Euro">€ Euro</option>
-          <option value="Peso Argentino">$ Peso Argentino</option>
         </select>
       </div>
       <div class="espacamento">
         <label for="moeda" class="label"><b>Converta para:</b></label>
-        <select name="moeda" id="moeda">
-          <option value="Dolar">US$ Dolar</option>
-          <option value="Euro">€ Euro</option>
-          <option value="Peso Argentino">$ Peso Argentino</option>
+        <select name="moeda" id="moeda" class="convertSelect">
+          <option value="dolar">US$ Dolar</option>
+          <option value="euro">€ Euro</option>
+          <option value="pesoArgentino">$ Peso Argentino</option>
         </select>
       </div>
       <div class="espacamento">
         <label for="valor" class="label"><b>Valor:</b></label>
-        <input type="text" placeholder="R$: 1000,00" class="input" />
+        <input type="text" placeholder="R$: 1000.00" class="input" />
       </div>
       <button class="button">Converter</button>
       <div class="wrapper-converser">
         <img class="icone" src="img/brasil.webp" />
         <p>Real</p>
-        <h2>R$ 0,00</h2>
+        <h2 id="current-value">R$ 0,00</h2>
         <img class="seta" src="img/seta.png" />
-        <img class="icone" src="img/america.svg" />
-        <p>Dólar americano</p>
-        <h2>US$ 0.00</h2>
+        <img class="icone" id="change-img" src="img/america.svg" />
+        <p class="coinChange">Dólar americano</p>
+        <h2 id="converted-value">US$ 0.00</h2>
       </div>
     </div>
     <script src="script.js"></script>
