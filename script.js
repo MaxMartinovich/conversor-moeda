@@ -77,6 +77,23 @@ const currencies = {
     img: "./img/mexico.jpg",
     locale: "es-MX",
   },
+  CNY: {
+    name: "Yuan Chinês",
+    img: "./img/chines.webp",
+    locale: "zh-CN",
+  },
+
+  SEK: {
+    name: "Coroa Sueca",
+    img: "./img/sueca.jpg",
+    locale: "sv-SE",
+  },
+
+  NZD: {
+    name: "Dólar Neozelandês",
+    img: "./img/nova.png",
+    locale: "en-NZ",
+  },
 };
 
 // ===============================
